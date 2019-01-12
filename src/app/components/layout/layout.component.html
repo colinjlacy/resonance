@@ -1,0 +1,26 @@
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <app-joblist></app-joblist>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar>
+      <span>{{title}}</span>
+      <span class="spacer"></span>
+      <button
+        mat-icon-button
+        color="accent"
+        (click)="navigate(['/'])"
+        [ngClass]="{'active-navbar-button': isActive(['/'])}">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="accent"
+        (click)="navigate(['/', 'settings'])"
+        [ngClass]="{'active-navbar-button': isActive(['/', 'settings'])}">
+        <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

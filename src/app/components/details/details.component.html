@@ -1,0 +1,64 @@
+<div *ngIf="job$ | async as job" class="job-details">
+
+  <div class="scan-form-layout">
+
+    <mat-form-field
+      *ngIf="!job.Name"
+      appearance="standard">
+      <mat-label>Job Name</mat-label>
+      <input
+        matInput
+        placeholder="job-1"
+        [disabled]="scannerActive"
+        [(ngModel)]="jobName">
+      <mat-hint>Required</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard" class="m_t_2">
+      <mat-label>Page Name</mat-label>
+      <input
+        matInput
+        [disabled]="scannerActive"
+        [placeholder]="'page-' + (job.Thumbnails?.length || 1)"
+        [(ngModel)]="pageName">
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="accent"
+      [disabled]="scannerActive"
+      (click)="scan(job.Thumbnails?.length)"
+      class="m_t_1">Scan</button>
+
+    <div *ngIf="!!job.Thumbnails && !!job.Thumbnails.length" class="m_t_2 scan-form">
+
+      <mat-form-field appearance="standard" class="m_t_2">
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          type="email"
+          [disabled]="scannerActive"
+          [(ngModel)]="emailAddress">
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="scannerActive"
+        (click)="email()"
+        class="m_t_1">Send!</button>
+
+    </div>
+
+  </div>
+
+  <div class="scan-images" *ngIf="!!job.Thumbnails && !!job.Thumbnails.length">
+
+    <div *ngFor="let img of job.Thumbnails" class="thumb" (click)="clickImage(img.Name)">
+      <img src="data:image/jpeg;base64,{{img.Content}}"/>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+@import "~src/styles";
+@import '~@angular/material/theming';
+
+.job-details {
+  width: 100%;
+  height: calc(100% - (1rem * 4)); // DOES NOT LIKE
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.scan-form,
+.scan-form-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.scan-form-layout {
+  width: 30%;
+  padding: $base;
+}
+
+.scan-images {
+  width: 70%;
+  padding: $base (2*$base) $base;
+  background-color: map_get($mat-gray, 200);
+  overflow: scroll;
+  .thumb {
+    max-width: 30%;
+    min-width: ($base * 5);
+    margin: 0 ($base / 2) $base;
+    display: inline-block;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,191 @@
+/*
+ Angular Material Theme
+ */
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$scanner-primary: (
+  50 : #e2e9f4,
+  100 : #b6c8e3,
+  200 : #86a3d0,
+  300 : #567ebd,
+  400 : #3163af,
+  500 : #0d47a1,
+  600 : #0b4099,
+  700 : #09378f,
+  800 : #072f85,
+  900 : #032074,
+  A100 : #a2b4ff,
+  A200 : #6f8aff,
+  A400 : #3c61ff,
+  A700 : #234cff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$scanner-accent: (
+  50 : #e4fcf6,
+  100 : #bbf8e9,
+  200 : #8ef4db,
+  300 : #61f0cc,
+  400 : #3fecc1,
+  500 : #1de9b6,
+  600 : #1ae6af,
+  700 : #15e3a6,
+  800 : #11df9e,
+  900 : #0ad98e,
+  A100 : #ffffff,
+  A200 : #d0ffec,
+  A400 : #9dffd8,
+  A700 : #84ffce,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$scanner-warn: (
+  50 : #fee8e7,
+  100 : #fcc7c3,
+  200 : #faa19b,
+  300 : #f77b72,
+  400 : #f65f54,
+  500 : #f44336,
+  600 : #f33d30,
+  700 : #f13429,
+  800 : #ef2c22,
+  900 : #ec1e16,
+  A100 : #ffffff,
+  A200 : #ffe9e9,
+  A400 : #ffb8b6,
+  A700 : #ff9f9c,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$scanner-primary-palette: mat-palette($scanner-primary, 400, 200, 700);
+$scanner-accent-palette: mat-palette($scanner-accent, 700, 500, 900);
+$scanner-warn-palette: mat-palette($scanner-warn);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$scanner-theme: mat-light-theme(
+    $scanner-primary-palette,
+    $scanner-accent-palette,
+    $scanner-warn-palette
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($scanner-theme);
+
+/*
+Global Variables
+ */
+
+$base: 16px;
+
+// Helpers
+
+.m_half   { margin:         $base / 2 }
+.m_t_half { margin-top:     $base / 2 }
+.m_b_half { margin-bottom:  $base / 2 }
+.m_l_half { margin-left:    $base / 2 }
+.m_r_half { margin-right:   $base / 2 }
+
+.m_1   { margin:         $base }
+.m_t_1 { margin-top:     $base }
+.m_b_1 { margin-bottom:  $base }
+.m_l_1 { margin-left:    $base }
+.m_r_1 { margin-right:   $base }
+
+.m_2   { margin:         $base * 2 }
+.m_t_2 { margin-top:     $base * 2 }
+.m_b_2 { margin-bottom:  $base * 2 }
+.m_l_2 { margin-left:    $base * 2 }
+.m_r_2 { margin-right:   $base * 2 }
+
+.p_half   { padding:         $base / 2 }
+.p_t_half { padding-top:     $base / 2 }
+.p_b_half { padding-bottom:  $base / 2 }
+.p_l_half { padding-left:    $base / 2 }
+.p_r_half { padding-right:   $base / 2 }
+
+.p_1   { padding:         $base }
+.p_t_1 { padding-top:     $base }
+.p_b_1 { padding-bottom:  $base }
+.p_l_1 { padding-left:    $base }
+.p_r_1 { padding-right:   $base }
+
+.p_2   { padding:         $base * 2 }
+.p_t_2 { padding-top:     $base * 2 }
+.p_b_2 { padding-bottom:  $base * 2 }
+.p_l_2 { padding-left:    $base * 2 }
+.p_r_2 { padding-right:   $base * 2 }
+
+body {
+  font-size: $base;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+

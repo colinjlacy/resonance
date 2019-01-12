@@ -1,0 +1,25 @@
+<div *ngIf="jobs$ | async as jobs">
+  <div *ngIf="!jobs.length" class="p_l_half p_r_half">
+    <h3 class="mat-h2 p_l_1 no-jobs"><em>No Recent Jobs to Display</em></h3>
+  </div>
+
+  <div *ngIf="!!jobs.length">
+    <h3 class="mat-h2 p_l_1">Recent Jobs</h3>
+    <div>
+      <ul class="job-list">
+        <li
+          *ngFor="let job of jobs"
+          class="job-list-item"
+          (click)="navigateToJob(job.Name)"
+          [ngClass]="{'active': activeJob === job.Name}">
+          <span>{{job.Name}}</span>
+          <span>{{job.FileCount}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!jobs$ | async">
+  <h3 class="mat-h3">Loading jobs...</h3>
+</div>

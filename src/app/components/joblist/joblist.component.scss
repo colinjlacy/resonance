@@ -1,0 +1,32 @@
+@import "~src/styles";
+@import '~@angular/material/theming';
+
+.active {
+  background-color: rgba(255, 255, 255, .2);
+  color: aliceblue;
+}
+
+.no-jobs {
+  color: rgba(0, 0, 0, .6);
+}
+
+.job-list-item {
+  padding: $base;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  transition: 200ms;
+  cursor: pointer;
+  border-top: 1px solid map_get($mat-blue-gray, 200);
+  &:hover {
+    background-color: rgba(255, 255, 255, .3);
+  }
+  &:last-child {
+    border-bottom: 1px solid map_get($mat-blue-gray, 200);
+  }
+}
+
+.job-list {
+  list-style-type: none;
+  padding: 0;
+}
