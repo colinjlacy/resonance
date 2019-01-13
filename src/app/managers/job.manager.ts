@@ -24,11 +24,15 @@ export class JobManager {
     return this.jobRas.watchJob();
   }
   
-  public updateJob(jobName: string): void {
+  public refreshJob(jobName: string): void {
     this.jobRas.fetchJob(jobName);
   }
   
   public emailJob(jobName: string, email: string): Observable<any> {
     return this.jobRas.emailJob(jobName, email);
+  }
+  
+  public deleteJob(jobName: string): Observable<any> {
+    return this.jobRas.deleteJob(jobName);
   }
 }

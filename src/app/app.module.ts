@@ -15,6 +15,7 @@ import {ImageViewerComponent} from './components/image-viewer/image-viewer.compo
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './app.route-serializer';
 import {SettingsComponent} from './components/settings/settings.component';
+import { ConfirmationBoxComponent } from './components/confirmation-box/confirmation-box.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {SettingsComponent} from './components/settings/settings.component';
     DetailsComponent,
     ImageViewerComponent,
     SettingsComponent,
+    ConfirmationBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import {SettingsComponent} from './components/settings/settings.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ImageViewerComponent]
+  entryComponents: [ImageViewerComponent, ConfirmationBoxComponent]
 })
 export class AppModule {
 }

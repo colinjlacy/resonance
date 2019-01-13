@@ -12,7 +12,7 @@ export class ScanRas {
     this.imageUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.IMAGE_PATH;
   }
   
-  public sendScanRequest(jobName: string, fileName?: string): Observable<Thumbnail> {
+  public sendScanRequest(jobName: string, prettyName: string, fileName?: string): Observable<Thumbnail> {
     return Observable.create(observer => {
       fetch(this.scanUrl, {
         method: 'POST',
@@ -34,6 +34,19 @@ export class ScanRas {
     return Observable.create(observer => {
       fetch(`${this.imageUrl}/${jobName}/${fileName}`)
         .then(response => response.json()) // or text() or blob() etc.
+        .then(data => {
+          observer.next(data);
+          observer.complete();
+        })
+        .catch(err => observer.error(err));
+    });
+  }
+  
+  public deleteImage(jobName: string, fileName: string): Observable<any> {
+    return Observable.create(observer => {
+      fetch(`${this.imageUrl}/${jobName}/${fileName}`, {
+        method: 'DELETE',
+      })
         .then(data => {
           observer.next(data);
           observer.complete();

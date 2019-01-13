@@ -57,4 +57,18 @@ export class JobRas {
         .catch(err => observer.error(err));
     });
   }
+  
+  
+  public deleteJob(jobName: string): Observable<any> {
+    return Observable.create(observer => {
+      fetch(`${this.jobUrl}/${jobName}`, {
+        method: 'DELETE',
+      })
+        .then(data => {
+          observer.next(data);
+          observer.complete();
+        })
+        .catch(err => observer.error(err));
+    });
+  }
 }

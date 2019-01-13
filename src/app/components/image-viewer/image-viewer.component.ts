@@ -8,6 +8,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class ImageViewerComponent {
   
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<ImageViewerComponent>) { }
   
+  deleteImage() {
+    this.dialogRef.close({delete: true});
+  }
 }

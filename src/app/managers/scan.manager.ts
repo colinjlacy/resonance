@@ -18,4 +18,8 @@ export class ScanManager {
   public fetchImage(jobName: string, filename: string): Observable<string> {
     return this.scanRas.fetchImageData(jobName, filename);
   }
+  
+  public deleteImage(jobName: string, filename: string): Observable<string> {
+    return this.scanRas.deleteImage(jobName, filename);
+  }
 }
