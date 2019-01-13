@@ -13,7 +13,7 @@ import {ActiveRouterState} from '../../app.route-serializer';
 })
 export class JoblistComponent implements OnInit, OnDestroy {
   
-  private jobs$: Observable<JobSummary[]>;
+  public jobs$: Observable<JobSummary[]>;
   private activeJobSubscription: Subscription;
   private activeJob: string;
   private jobManager: JobManager;

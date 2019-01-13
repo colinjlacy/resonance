@@ -18,15 +18,15 @@ import {ConfirmationBoxComponent} from '../confirmation-box/confirmation-box.com
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   
-  private job: JobDetails;
-  private jobName: string;
-  private pageName: string;
+  public job: JobDetails;
+  public jobName: string;
+  public pageName: string;
+  public scannerActive: boolean;
+  public emailAddress: string;
   private jobManager: JobManager;
   private scanManager: ScanManager;
   private jobSubscription: Subscription;
   private scannerActiveSubscription: Subscription;
-  private scannerActive: boolean;
-  private emailAddress: string;
   
   constructor(private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {
     this.jobManager = new JobManager();

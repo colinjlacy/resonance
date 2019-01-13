@@ -11,9 +11,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit, OnDestroy {
-
+  
+  public title: string;
   private titleSubscription: Subscription;
-  private title: string;
   private routerStoreSubscription: Subscription;
   private routerState: ActiveRouterState;
   
@@ -35,11 +35,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.routerStoreSubscription.unsubscribe();
   }
   
-  private isActive(targetPaths: string[]): boolean {
+  isActive(targetPaths: string[]): boolean {
     return targetPaths.join('') === this.routerState.state.url;
   }
   
-  private navigate(targetPaths: string[]): void {
+  navigate(targetPaths: string[]): void {
     this.router.navigate(targetPaths);
   }
   
