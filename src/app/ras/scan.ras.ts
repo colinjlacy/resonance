@@ -1,7 +1,6 @@
 import {environment} from '../../environments/environment';
 import {Thumbnail} from '../types/Thumbnail';
-import {from, Observable} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 export class ScanRas {
   private scanUrl: string;
@@ -12,12 +11,13 @@ export class ScanRas {
     this.imageUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.IMAGE_PATH;
   }
   
-  public sendScanRequest(jobName: string, prettyName: string, fileName?: string): Observable<Thumbnail> {
+  public sendScanRequest(prettyName: string, jobName: string, fileName?: string): Observable<{[key: string]: string}> {
     return Observable.create(observer => {
       fetch(this.scanUrl, {
         method: 'POST',
         body: JSON.stringify({
           foldername: jobName,
+          prettyName,
           filename: fileName
         })
       })

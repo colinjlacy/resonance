@@ -25,7 +25,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.titleSubscription = TitleService.watchTitle()
       .subscribe((title: string) => this.title = title);
     this.routerStoreSubscription = this.store.select('router').subscribe((val: ActiveRouterState) => {
-      console.log(val);
       this.routerState = val;
     });
   }

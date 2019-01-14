@@ -12,7 +12,7 @@
           class="job-list-item"
           (click)="navigateToJob(job.Name)"
           [ngClass]="{'active': activeJob === job.Name}">
-          <span>{{job.Name}}</span>
+          <span>{{job.PrettyName || job.Name}}</span>
         </li>
       </ul>
     </div>

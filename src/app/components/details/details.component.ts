@@ -47,7 +47,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
         return of(new JobDetails());
       })
     ).subscribe((job: JobDetails) => {
-      TitleService.setTitle(job.PrettyName || job.Name);
+      if (!!job.Name) { TitleService.setTitle(job.PrettyName || job.Name); }
       this.job = job;
     });
   }
@@ -72,7 +72,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
           // @ts-ignore
             .subscribe((decision: boolean) => {
               if (!!decision) {
-                this.deleteImage(this.job.Name, fileName);
+                if (this.job.Thumbnails.length === 1) {
+                  this.deleteJob(this.job.Name);
+                } else {
+                  this.deleteImage(this.job.Name, fileName);
+                }
               }
             });
         }
@@ -86,11 +90,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
     if (!filename.length) {
       filename = `page-${fileCount + 1}`;
     }
-    this.scanManager.scan(this.job.PrettyName, filename).subscribe(() => {
+    console.log(filename);
+    this.scanManager.scan(this.job.PrettyName, this.job.Name, filename).subscribe((data: {[key: string]: string}) => {
       ScannerActiveService.setScannerActiveState(false);
       this.jobManager.refeshJobsList();
       if (!fileCount) {
-        this.router.navigate(['/', this.jobName]);
+        this.router.navigate(['/', data.foldername]);
       } else {
         this.jobManager.refreshJob(this.jobName);
       }
