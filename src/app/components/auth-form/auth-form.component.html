@@ -1,0 +1,44 @@
+<!--
+- design password reset workflow
+-->
+<div class="auth-form flex-column">
+  <div class="m_b_1">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="'create'">
+      <mat-button-toggle value="create">
+        <mat-icon>person_add</mat-icon> Create Account
+      </mat-button-toggle>
+      <mat-button-toggle value="login">
+        <mat-icon>home</mat-icon> Sign In
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <mat-form-field appearance="standard" class="">
+    <mat-label>Email Address</mat-label>
+    <input
+      matInput
+      type="email"
+      [(ngModel)]="emailAddress">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      type="password"
+      [(ngModel)]="password">
+  </mat-form-field>
+
+  <mat-form-field appearance="standard" class="" *ngIf="group.value === 'create'">
+    <mat-label>Confirm Password</mat-label>
+    <input
+      matInput
+      type="password"
+      [(ngModel)]="passwordConf">
+  </mat-form-field>
+
+  <div class="flex-row flex-spread m_t_2">
+    <button mat-flat-button (click)="clearForm()">Clear</button>
+    <button mat-flat-button color="accent" (click)="submitForm(group.value)">Submit</button>
+  </div>
+</div>

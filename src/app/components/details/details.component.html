@@ -49,12 +49,28 @@
         (click)="email()"
         class="m_t_1">Send!</button>
 
+      <mat-form-field appearance="standard" class="m_t_2">
+        <mat-label>Cloud Upload Path</mat-label>
+        <input
+          matInput
+          type="text"
+          [disabled]="scannerActive"
+          [(ngModel)]="destination">
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="scannerActive"
+        (click)="store()"
+        class="m_t_1">Send!</button>
+
       <button
         mat-flat-button
         color="warn"
         [disabled]="scannerActive"
         (click)="deleteThisJob()"
-        class="m_t_1">Delete!</button>
+        class="m_t_2">Delete!</button>
 
     </div>
 

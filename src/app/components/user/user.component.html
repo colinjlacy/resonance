@@ -1,0 +1,18 @@
+<div class="p_1">
+  <app-auth-form *ngIf="displayLogin === true" (create)="handleCreate($event)" (login)="handleLogin($event)"></app-auth-form>
+  <div *ngIf="!displayLogin" class="flex-column">
+    <div class="flex-row flex-spread">
+      <div *ngIf="!isSynced" class="flex-column">
+        <h3>You are not currently synced to an Alexa-enabled device.</h3>
+        <p>You'll need to enable the Reborne skill in your Alexa account before you can initialize the sync process.</p>
+        <mat-checkbox class="m_t_1" [(ngModel)]="isSkillEnabled">I confirm that I have enabled the Reborne skill in my Alexa app.</mat-checkbox>
+        <div class="m_t_2">
+          <button mat-flat-button color="accent" (click)="initializeSync()" [disabled]="isSkillEnabled === false">Sync with Alexa</button>
+        </div>
+      </div>
+      <div>
+        <button mat-flat-button color="accent" (click)="handleLogout()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>

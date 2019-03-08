@@ -20,6 +20,13 @@
         [ngClass]="{'active-navbar-button': isActive(['/', 'settings'])}">
         <mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon>
       </button>
+      <button
+        mat-icon-button
+        color="accent"
+        (click)="navigate(['/', 'user'])"
+        [ngClass]="{'active-navbar-button': isActive(['/', 'user'])}">
+        <mat-icon aria-label="Example icon-button with a heart icon">person</mat-icon>
+      </button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-drawer-content>

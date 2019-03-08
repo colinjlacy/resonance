@@ -23,6 +23,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   public pageName: string;
   public scannerActive: boolean;
   public emailAddress: string;
+  public destination: string;
   private jobManager: JobManager;
   private scanManager: ScanManager;
   private jobSubscription: Subscription;
@@ -84,13 +85,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
     });
   }
   
+  // TODO: clear form field on submit
   scan(fileCount: number = 0): void {
     ScannerActiveService.setScannerActiveState(true);
     let filename: string = !!this.pageName ? this.pageName.trim() : '';
     if (!filename.length) {
-      filename = `page-${fileCount + 1}`;
+      filename = `${Date.now()}`;
     }
-    console.log(filename);
     this.scanManager.scan(this.job.PrettyName, this.job.Name, filename).subscribe((data: {[key: string]: string}) => {
       ScannerActiveService.setScannerActiveState(false);
       this.jobManager.refeshJobsList();
@@ -105,8 +106,23 @@ export class DetailsComponent implements OnInit, OnDestroy {
     });
   }
   
+  // TODO: clear form field on submit
   email(): void {
-    this.jobManager.emailJob(this.jobName, this.emailAddress).subscribe(() => console.log('success!'), (error) => console.warn(error));
+    this.jobManager.emailJob(this.jobName, this.emailAddress)
+      .subscribe(
+        this.clearEmailFields.bind(this),
+        (error) => console.warn(error)
+      );
+  }
+  
+  // TODO: validate request
+  // TODO: clear form field on submit
+  store(): void {
+    this.jobManager.storeJob(this.job.Name, this.destination)
+      .subscribe(
+        this.clearCloudUploadPath.bind(this),
+        (error) => console.warn(error)
+      );
   }
   
   deleteThisJob(): void {
@@ -144,5 +160,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.jobManager.refeshJobsList();
         this.router.navigate(['/']);
       });
+  }
+  
+  private clearEmailFields() {
+    this.emailAddress = '';
+  }
+  
+  private clearCloudUploadPath() {
+    this.destination = '';
   }
 }

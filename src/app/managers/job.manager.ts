@@ -32,6 +32,10 @@ export class JobManager {
     return this.jobRas.emailJob(jobName, email);
   }
   
+  public storeJob(jobName: string, destination: string): Observable<any> {
+    return this.jobRas.storeJob(jobName, destination);
+  }
+  
   public deleteJob(jobName: string): Observable<any> {
     return this.jobRas.deleteJob(jobName);
   }

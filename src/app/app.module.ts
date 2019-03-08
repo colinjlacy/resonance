@@ -9,13 +9,15 @@ import {LayoutComponent} from './components/layout/layout.component';
 import {JoblistComponent} from './components/joblist/joblist.component';
 import {AppRoutingModule} from './app.routes';
 import {DetailsComponent} from './components/details/details.component';
-import {MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatButtonToggleModule, MatDialogModule, MatIconModule, MatInputModule, MatToolbarModule, MatCheckboxModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {ImageViewerComponent} from './components/image-viewer/image-viewer.component';
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './app.route-serializer';
 import {SettingsComponent} from './components/settings/settings.component';
 import { ConfirmationBoxComponent } from './components/confirmation-box/confirmation-box.component';
+import { AuthFormComponent } from './components/auth-form/auth-form.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ConfirmationBoxComponent } from './components/confirmation-box/confirma
     ImageViewerComponent,
     SettingsComponent,
     ConfirmationBoxComponent,
+    AuthFormComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,8 +37,10 @@ import { ConfirmationBoxComponent } from './components/confirmation-box/confirma
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatToolbarModule,
     MatDialogModule,
+    MatCheckboxModule,
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,

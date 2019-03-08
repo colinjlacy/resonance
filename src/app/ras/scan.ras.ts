@@ -19,7 +19,10 @@ export class ScanRas {
           foldername: jobName,
           prettyName,
           filename: fileName
-        })
+        }), headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
         .then(response => response.json()) // or text() or blob() etc.
         .then(data => {

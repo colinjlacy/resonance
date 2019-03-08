@@ -12,6 +12,11 @@ export const environment = {
   SCAN_PATH: `/scan`,
   IMAGE_PATH: `/image`,
   EMAIL_PATH: `/email`,
+  STORE_PATH: `/store`,
+  USER_PATH: `/user`,
+  AUTH_PATH: `/auth`,
+  SYNCED_PATH: `/user/synced`,
+  SYNC_WS_PATH: `/sync`,
 };
 
 /*

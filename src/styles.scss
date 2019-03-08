@@ -171,6 +171,38 @@ $base: 16px;
 .p_l_2 { padding-left:    $base * 2 }
 .p_r_2 { padding-right:   $base * 2 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+
+  &.flex-spread {
+    justify-content: space-between;
+  }
+
+  &.flex-center {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  &.flex-start {
+    justify-content: flex-start;
+  }
+
+  &.flex-end {
+    justify-content: flex-end;
+  }
+
+}
+
+
+
+
 body {
   font-size: $base;
   margin: 0;

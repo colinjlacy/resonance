@@ -11,11 +11,13 @@ export class JobRas {
   private jobsUrl: string;
   private jobUrl: string;
   private emailUrl: string;
+  private storeUrl: string;
   
   constructor() {
     this.jobsUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.JOBS_PATH;
     this.jobUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.JOB_PATH;
     this.emailUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.EMAIL_PATH;
+    this.storeUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.STORE_PATH;
   }
   
   public watchJobsList(): Subject<JobSummary[]> {
@@ -47,7 +49,10 @@ export class JobRas {
         body: JSON.stringify({
           foldername: jobName,
           emailAddress: email
-        })
+        }), headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
         .then(response => response.json()) // or text() or blob() etc.
         .then(data => {
@@ -58,6 +63,24 @@ export class JobRas {
     });
   }
   
+  // TODO: error handling isn't working
+  public storeJob(foldername: string, destination: string): Observable<any> {
+    return Observable.create(observer => {
+      fetch(this.storeUrl, {
+        method: 'POST',
+        body: JSON.stringify({ foldername, destination }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(data => {
+          observer.next(data);
+          observer.complete();
+        })
+        .catch(err => observer.error(err));
+    });
+  }
   
   public deleteJob(jobName: string): Observable<any> {
     return Observable.create(observer => {
