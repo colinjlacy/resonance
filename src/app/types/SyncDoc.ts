@@ -4,5 +4,6 @@ export interface SyncDoc {
   a: boolean; // approved
   i: string; // voiceUserInfo
   g: string; // generatedCode
-  c: number; // attemptedCode
+  c: string; // attemptedCode
+  l: string; // voiceUserLocation
 }

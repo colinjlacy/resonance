@@ -4,6 +4,8 @@ import {AppUser} from '../types/AppUser';
 import {UserCredentials} from '../types/UserCredentials';
 import {RequestResponse} from '../types/RequestResponse';
 import { map } from 'rxjs/operators';
+import {WebSocketSubject} from 'rxjs/webSocket';
+import {SyncDoc} from '../types/SyncDoc';
 
 export class UserManager {
   private authRas: AuthRas;
@@ -28,12 +30,13 @@ export class UserManager {
     return this.authRas.fetchSyncStatus();
   }
   
-  public initializeSync(): void {
+  public initializeSync(): WebSocketSubject<SyncDoc | {[key: string]: boolean}> {
     return this.authRas.initiateSyncConnection();
   }
   
   public logoutUser(): Observable<void> {
     return this.authRas.logoutUser().pipe(map((data: RequestResponse<null>) => {
+      // TODO: error handling
       if (data.error) { throw new Error(data.message); }
       return null;
     }));

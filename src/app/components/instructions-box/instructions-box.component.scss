@@ -1,0 +1,7 @@
+@import "../../../styles";
+
+.auth-code {
+  letter-spacing: 1.5rem;
+  font-size: 1.5rem;
+  color: map_get($scanner-accent-palette, 500);
+}

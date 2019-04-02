@@ -4,6 +4,8 @@ import {UserCredentials} from '../types/UserCredentials';
 import {RequestResponse} from '../types/RequestResponse';
 import {SyncDoc} from '../types/SyncDoc';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {MatSnackBar} from '@angular/material';
+import {SnackbarService} from '../services/snackbar.service';
 
 const user: Subject<AppUser> = new Subject<AppUser>();
 
@@ -13,8 +15,6 @@ export class AuthRas {
   syncedUrl: string;
   authUrl: string;
   syncWsUrl: string;
-  socketSubject: Subscription;
-  cx: WebSocketSubject<SyncDoc>;
   
   constructor() {
     this.userUrl = 'http://localhost:3000/user';
@@ -29,7 +29,7 @@ export class AuthRas {
   
   public fetchCurrentUser(): Observable<AppUser> {
     fetch(`${this.userUrl}`)
-      .then(response => response.json() )
+      .then(response => response.json())
       .then((data: AppUser) => {
         user.next(data);
       })
@@ -38,14 +38,16 @@ export class AuthRas {
   }
   
   public authenticateUser(c: UserCredentials): Observable<AppUser> {
-    fetch(`${this.authUrl}`, {method: 'POST', body: JSON.stringify({
+    fetch(`${this.authUrl}`, {
+      method: 'POST', body: JSON.stringify({
         email: c.emailAddress,
         password: c.password
       }), headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }})
-      .then(response => response.json() )
+      }
+    })
+      .then(response => response.json())
       .then((data: any) => {
         user.next(data.user);
       })
@@ -54,14 +56,16 @@ export class AuthRas {
   }
   
   public createUser(c: UserCredentials): Observable<AppUser> {
-    fetch(`${this.userUrl}`, {method: 'POST', body: JSON.stringify({
+    fetch(`${this.userUrl}`, {
+      method: 'POST', body: JSON.stringify({
         email: c.emailAddress,
         password: c.password
       }), headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }})
-      .then(response => response.json() )
+      }
+    })
+      .then(response => response.json())
       .then((data: any) => {
         user.next(data.user);
       })
@@ -72,11 +76,11 @@ export class AuthRas {
   public logoutUser(): Observable<RequestResponse<null>> {
     return Observable.create((subscriber: Subscriber<RequestResponse<null>>) => {
       fetch(`${this.authUrl}`, {method: 'DELETE'})
-      .then(response => response.json() )
-      .then((data: RequestResponse<null>) => {
-        subscriber.next(data);
-        subscriber.complete();
-      });
+        .then(response => response.json())
+        .then((data: RequestResponse<null>) => {
+          subscriber.next(data);
+          subscriber.complete();
+        });
     });
   }
   
@@ -84,21 +88,14 @@ export class AuthRas {
     return Observable.create((subscriber: Subscriber<boolean>) => {
       fetch(`${this.syncedUrl}`)
         .then(response => response.json())
-        .then((res: RequestResponse<{synced: boolean}>) => {
+        .then((res: RequestResponse<{ synced: boolean }>) => {
           subscriber.next(res.data.synced);
           subscriber.complete();
         });
     });
   }
   
-  public initiateSyncConnection(): void {
-    if (!!this.cx) {
-      this.cx.unsubscribe();
-    }
-    this.cx = webSocket(this.syncWsUrl);
-    if (!!this.socketSubject) {
-      this.socketSubject.unsubscribe();
-    }
-    this.socketSubject = this.cx.subscribe((msg: SyncDoc) => console.log(msg));
+  public initiateSyncConnection(): WebSocketSubject<SyncDoc | { [key: string]: boolean }> {
+    return webSocket(this.syncWsUrl);
   }
 }

@@ -1,0 +1,11 @@
+<div>
+  <h2 mat-dialog-title>{{data.action}}</h2>
+  <mat-dialog-content class="mat-typography">
+    <p>{{data.instructions}}</p>
+    <p class="auth-code m_t_2 m_b_2">{{data.code}}</p>
+    <p>{{data.followUp}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [matDialogClose]="true">Nevermind, Cancel</button>
+  </mat-dialog-actions>
+</div>

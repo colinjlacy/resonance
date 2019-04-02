@@ -7,8 +7,13 @@
         <p>You'll need to enable the Reborne skill in your Alexa account before you can initialize the sync process.</p>
         <mat-checkbox class="m_t_1" [(ngModel)]="isSkillEnabled">I confirm that I have enabled the Reborne skill in my Alexa app.</mat-checkbox>
         <div class="m_t_2">
-          <button mat-flat-button color="accent" (click)="initializeSync()" [disabled]="isSkillEnabled === false">Sync with Alexa</button>
+          <button mat-flat-button color="accent"
+                  [disabled]="isSkillEnabled === false || isCurrentlySyncing === true"
+                  (click)="initializeSync()">Sync with Alexa</button>
         </div>
+      </div>
+      <div *ngIf="isSynced">
+        <p>You are synced!</p>
       </div>
       <div>
         <button mat-flat-button color="accent" (click)="handleLogout()">Sign Out</button>

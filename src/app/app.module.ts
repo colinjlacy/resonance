@@ -9,15 +9,26 @@ import {LayoutComponent} from './components/layout/layout.component';
 import {JoblistComponent} from './components/joblist/joblist.component';
 import {AppRoutingModule} from './app.routes';
 import {DetailsComponent} from './components/details/details.component';
-import {MatButtonModule, MatButtonToggleModule, MatDialogModule, MatIconModule, MatInputModule, MatToolbarModule, MatCheckboxModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatSnackBarModule
+} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {ImageViewerComponent} from './components/image-viewer/image-viewer.component';
 import {routerReducer, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './app.route-serializer';
 import {SettingsComponent} from './components/settings/settings.component';
-import { ConfirmationBoxComponent } from './components/confirmation-box/confirmation-box.component';
-import { AuthFormComponent } from './components/auth-form/auth-form.component';
-import { UserComponent } from './components/user/user.component';
+import {ConfirmationBoxComponent} from './components/confirmation-box/confirmation-box.component';
+import {AuthFormComponent} from './components/auth-form/auth-form.component';
+import {UserComponent} from './components/user/user.component';
+import {InstructionsBoxComponent} from './components/instructions-box/instructions-box.component';
+import {SnackbarService} from './services/snackbar.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +41,7 @@ import { UserComponent } from './components/user/user.component';
     ConfirmationBoxComponent,
     AuthFormComponent,
     UserComponent,
+    InstructionsBoxComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +53,7 @@ import { UserComponent } from './components/user/user.component';
     MatToolbarModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -55,9 +68,10 @@ import { UserComponent } from './components/user/user.component';
       serializer: CustomSerializer
     }),
   ],
-  providers: [],
+  providers: [SnackbarService],
   bootstrap: [AppComponent],
-  entryComponents: [ImageViewerComponent, ConfirmationBoxComponent]
+  entryComponents: [ImageViewerComponent, ConfirmationBoxComponent, InstructionsBoxComponent]
 })
 export class AppModule {
+  constructor(private snackbar: SnackbarService) {}
 }
