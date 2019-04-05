@@ -4,8 +4,7 @@ import {UserCredentials} from '../types/UserCredentials';
 import {RequestResponse} from '../types/RequestResponse';
 import {SyncDoc} from '../types/SyncDoc';
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
-import {MatSnackBar} from '@angular/material';
-import {SnackbarService} from '../services/snackbar.service';
+import {environment} from '../../environments/environment';
 
 const user: Subject<AppUser> = new Subject<AppUser>();
 
@@ -17,14 +16,14 @@ export class AuthRas {
   syncWsUrl: string;
   
   constructor() {
-    this.userUrl = 'http://localhost:3000/user';
-    this.syncedUrl = 'http://localhost:3000/user/synced';
-    this.authUrl = 'http://localhost:3000/auth';
-    this.syncWsUrl = 'ws://localhost:3000/sync';
-    // this.userUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.USER_PATH;
-    // this.syncedUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.SYNCED_URL;
-    // this.authUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.AUTH_PATH;
-    // this.syncWsUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.SYNC_WS_PATH;
+    // this.userUrl = 'http://localhost:3000/user';
+    // this.syncedUrl = 'http://localhost:3000/user/synced';
+    // this.authUrl = 'http://localhost:3000/auth';
+    // this.syncWsUrl = 'ws://localhost:3000/sync';
+    this.userUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.USER_PATH;
+    this.syncedUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.SYNCED_PATH;
+    this.authUrl = environment.HOST_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.AUTH_PATH;
+    this.syncWsUrl = environment.WS_PROTO + environment.HOST_NAME + environment.HOST_PORT + environment.SYNC_WS_PATH;
   }
   
   public fetchCurrentUser(): Observable<AppUser> {

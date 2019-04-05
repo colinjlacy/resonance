@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   HOST_PROTO: `http://`,
+  WS_PROTO: `ws://`,
   HOST_NAME: `raspberrypi.local`,
   HOST_PORT: `:3000`,
   JOB_PATH: `/job`,
